@@ -1,0 +1,9 @@
+.cache/
+coverage/
+dist/
+!dist/index.html
+node_modules/
+*.log
+.DS_Store
+.env
+package-lock.json
