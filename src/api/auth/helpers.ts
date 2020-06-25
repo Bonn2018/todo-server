@@ -1,16 +1,20 @@
 import * as regExps from '../../@core/utils/reg_exps';
+import { Err } from '../../@core/errors';
 
 export function validateSignUpBody(reqBody: Record<string, string>) {
   const userArguments = ['email', 'firstName', 'lastName', 'password'];
   
-
-  return isValidRequest(reqBody, userArguments);
+  if (!isValidRequest(reqBody, userArguments)) {
+    throw new Err.ValidationError();
+  }
 }
 
 export function validateSignInBody(reqBody: Record<string, string>)  {
   const userArguments = ['email', 'password'];
 
-  return isValidRequest(reqBody, userArguments);
+  if (!isValidRequest(reqBody, userArguments)) {
+    throw new Err.ValidationError();
+  }
 }
 
 export function isValidRequest(reqBody: Record<string, string>, payloadKeys: string[]) {
