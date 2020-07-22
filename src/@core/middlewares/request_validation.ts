@@ -1,3 +1,4 @@
+import { regularEmail } from './../regEmail';
 import * as Joi from '@hapi/joi'
 import * as express from 'express'
 import {
@@ -5,12 +6,12 @@ import {
 } from 'express-joi-validation'
 
 const validator = createValidator()
+const p = '/^[0-9+]{7}-[0-9+]{1}$/';
 
 const signUpBodySchema = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
-  email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+  email: Joi.string().regex(regularEmail).required(),
   password: Joi.string().min(5).max(15).required(),
 })
 
