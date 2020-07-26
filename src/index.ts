@@ -1,7 +1,8 @@
 import Express from 'express';
-import * as bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { validator, signUpBodySchema } from './@core/middlewares/request_validation'
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config({ path: '.env' })
@@ -30,7 +31,7 @@ app.get('/', (req: Express.Request, res: Express.Response, next: Express.NextFun
   next();
 });
 
-app.post('/sign_up', AuthController.signUp);
+app.post('/sign_up', validator.body(signUpBodySchema), AuthController.signUp);
 
 app.post('/sign_in', AuthController.signIn);
 
